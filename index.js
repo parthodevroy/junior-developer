@@ -12,6 +12,18 @@ let calls=100;
 
 let transection=[]
 
+const callButtons = document.querySelectorAll(".calling-btn");
+
+callButtons.forEach(btn => {
+  btn.addEventListener("click", function() {
+    const serviceName = this.getAttribute("data-name");
+    const serviceNumber = this.getAttribute("data-number");
+
+    alert(`📞 Calling ${serviceName} (${serviceNumber})`);
+  });
+});
+
+
 
 
 
@@ -31,43 +43,49 @@ function callsTransactions() {
     transection.forEach(t=> {
         const li = document.createElement("li");
         li.className = "  border-2 border-white bg-gray-200";
-        li.textContent = `${t.name} 
-         - ${t.number} -
-          (${t.time})`;
+        li.textContent = `${t.name} - ${t.number} -(${t.time})`;
         list.appendChild(li);
     });
 }
 
+// copy butoon 
+const copyButtons = document.querySelectorAll(".copy-btn");
 
-const copybutton =document.querySelectorAll(".copy-btn").forEach(btn =>{
-    btn.addEventListener("click", function(){
-        alert('button clicked');
-        points += 1;
-        document.getElementById('copy-Count').textContent = points;
-        
-    })
-})
+copyButtons.forEach(btn => {
+  btn.addEventListener("click", function() {
+    const number = this.getAttribute("data-number");
+    
+    navigator.clipboard.writeText(number).then(() => {
+      alert(`📋 Copied: ${number}`); 
+    }).catch(err => {
+      console.error("Failed to copy: ", err);
+    });
+    points += 1;
+    document.getElementById('copy-Count').textContent = points;
+  });
+});
 
 
+// heart button
  const heartbutton= document.querySelectorAll(".heart-btn").forEach(bttn =>{
     bttn.addEventListener("click", function(){
-        alert('heart clicked');
         hearts += 1;
         document.getElementById('hearts-Count').textContent =hearts
 
         
     })
 })
-
+// calls button
 const callcounts=document.querySelectorAll(".calling-btn").forEach(button =>{
     button.addEventListener("click", function(){
         if (calls >= 20) {
             calls -= 20;
-            alert('you cost 20 balance');
 
         } else {
-            alert('unsuficisend');
+            alert('Insuficiant Balance');
+            return;
         }
+    
 
         document.getElementById('callas-Count').textContent = calls;
 
