@@ -11,6 +11,7 @@ let hearts=0;
 let calls=100;
 
 let transection=[]
+// call number and name history showing with alart
 
 const callButtons = document.querySelectorAll(".calling-btn");
 
